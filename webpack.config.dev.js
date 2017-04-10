@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const distPath = path.resolve(__dirname, 'www');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const context = path.resolve(__dirname, 'src');
 
 const config = {
     entry: {
@@ -33,12 +34,47 @@ const config = {
             {
                 test: /\.jsx*$/,
                 loader: 'babel-loader',
+                query: {
+                  plugins: [
+                    'transform-react-jsx',
+                    [
+                      'react-css-modules',
+                      {
+                        context
+                      }
+                    ]
+                  ]
+                },
                 exclude: [nodeModulesPath]
             },
             {
                 test: /\.pug$/,
                 loader: 'pug-loader',
                 exclude: [nodeModulesPath]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader",
+                        query: {
+                            modules: true,
+                            localIdentName: '[name]__[local]___[hash:base64:5]',
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        query: {
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
+                    }
+                ]
             }
         ]
     }

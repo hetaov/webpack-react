@@ -1,7 +1,8 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import Option from './Option';
+import ProTypes from 'prop-types';
 
 class Question extends Component {
     render () {

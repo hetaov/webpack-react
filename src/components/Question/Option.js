@@ -1,6 +1,8 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import styles from '../../stylesheets/component/Button.scss'
+import ProTypes from 'prop-types';
 
 class Option extends Component {
     render () {
@@ -9,8 +11,9 @@ class Option extends Component {
             value,
             label
         } = this.props;
+        console.log(styles.normal, styles);
         return (
-            <div>
+            <div className={styles.normal}>
                 <input type="radio" name={name} value={value} />
                 { label }
             </div>
